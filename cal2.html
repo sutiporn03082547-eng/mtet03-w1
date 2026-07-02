@@ -1,0 +1,120 @@
+import webbrowser
+import os
+
+html_content = """<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Purple Web Calculator</title>
+    <style>
+        body {
+            background-color: #f3e8ff;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+        .calculator {
+            background-color: white;
+            padding: 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 20px rgba(107, 33, 168, 0.15);
+            border: 2px solid #d8b4fe;
+            width: 260px;
+        }
+        #display {
+            width: 100%;
+            height: 50px;
+            background-color: #e9d5ff;
+            border: none;
+            border-radius: 8px;
+            margin-bottom: 15px;
+            font-size: 24px;
+            color: #4c1d95;
+            text-align: right;
+            box-sizing: border-box;
+            padding: 10px;
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            background-color: #c084fc;
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 18px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+        button:hover { background-color: #a855f7; }
+        .op { background-color: #9333ea; }
+        .op:hover { background-color: #7e22ce; }
+        .equal {
+            background-color: #7e22ce;
+            grid-row: span 2;
+        }
+        .equal:hover { background-color: #581c87; }
+        .zero { grid-column: span 2; }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" id="display" disabled>
+        <div class="buttons">
+            <button class="op" onclick="clearDisplay()">C</button>
+            <button class="op" onclick="appendValue('/')">/</button>
+            <button class="op" onclick="appendValue('*')">*</button>
+            <button class="op" onclick="appendValue('-')">-</button>
+            
+            <button onclick="appendValue('7')">7</button>
+            <button onclick="appendValue('8')">8</button>
+            <button onclick="appendValue('9')">9</button>
+            <button class="op" onclick="appendValue('+')">+</button>
+            
+            <button onclick="appendValue('4')">4</button>
+            <button onclick="appendValue('5')">5</button>
+            <button onclick="appendValue('6')">6</button>
+            <button class="equal" onclick="calculate()">=</button>
+            
+            <button onclick="appendValue('1')">1</button>
+            <button onclick="appendValue('2')">2</button>
+            <button onclick="appendValue('3')">3</button>
+            
+            <button class="zero" onclick="appendValue('0')">0</button>
+            <button onclick="appendValue('.')">.</button>
+        </div>
+    </div>
+
+    <script>
+        function appendValue(val) {
+            document.getElementById('display').value += val;
+        }
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+        function calculate() {
+            try {
+                let result = eval(document.getElementById('display').value);
+                document.getElementById('display').value = result;
+            } catch(e) {
+                document.getElementById('display').value = 'Error';
+            }
+        }
+    </script>
+</body>
+</html>
+"""
+
+# บันทึกไฟล์ HTML และสั่งเปิด
+filename = "purple_calculator_web.html"
+with open(filename, "w", encoding="utf-8") as file:
+    file.write(html_content)
+
+filepath = 'file://' + os.path.realpath(filename)
+webbrowser.open(filepath)

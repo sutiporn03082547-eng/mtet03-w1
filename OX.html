@@ -1,0 +1,61 @@
+import webbrowser
+import os
+
+html_content = """<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Purple XO Game</title>
+    <style>
+        body { background-color: #f3e8ff; display: flex; justify-content: center; align-items: center; height: 100vh; font-family: Arial; margin: 0; }
+        .container { text-align: center; }
+        h1 { color: #6b21a8; }
+        .board { display: grid; grid-template-columns: repeat(3, 100px); gap: 5px; justify-content: center; }
+        .cell { width: 100px; height: 100px; background: white; border: 2px solid #d8b4fe; font-size: 48px; font-weight: bold; color: #7e22ce; display: flex; justify-content: center; align-items: center; cursor: pointer; border-radius: 10px; }
+        .cell:hover { background-color: #e9d5ff; }
+        button { margin-top: 20px; padding: 10px 20px; font-size: 16px; background: #9333ea; color: white; border: none; border-radius: 5px; cursor: pointer; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>💜 เกม XO สีม่วง 💜</h1>
+        <div class="board" id="board"></div>
+        <button onclick="resetGame()">เริ่มใหม่</button>
+    </div>
+
+    <script>
+        let turn = 'X';
+        const board = document.getElementById('board');
+        
+        function createBoard() {
+            board.innerHTML = '';
+            for(let i=0; i<9; i++) {
+                let cell = document.createElement('div');
+                cell.className = 'cell';
+                cell.onclick = function() {
+                    if(!this.innerText) {
+                        this.innerText = turn;
+                        turn = turn === 'X' ? 'O' : 'X';
+                    }
+                };
+                board.appendChild(cell);
+            }
+        }
+        
+        function resetGame() {
+            turn = 'X';
+            createBoard();
+        }
+        
+        createBoard();
+    </script>
+</body>
+</html>
+"""
+
+# บันทึกไฟล์และเปิดหน้าเว็บ
+filename = "purple_xo_game.html"
+with open(filename, "w", encoding="utf-8") as file:
+    file.write(html_content)
+
+webbrowser.open('file://' + os.path.realpath(filename))

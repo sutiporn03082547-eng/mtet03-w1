@@ -1,0 +1,61 @@
+import webbrowser
+import os
+
+# โค้ดหน้าตาเว็บเพจ (HTML/CSS) โทนสีม่วง
+html_content = """<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <title>Purple Webpage</title>
+    <style>
+        body {
+            background-color: #f3e8ff; /* พื้นหลังสีม่วงพาสเทล */
+            font-family: 'Arial', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .card {
+            background-color: white;
+            padding: 40px;
+            border-radius: 20px;
+            box-shadow: 0 10px 20px rgba(107, 33, 168, 0.15);
+            text-align: center;
+            border-top: 6px solid #9333ea;
+        }
+        h1 { color: #6b21a8; margin-top: 0; }
+        p { color: #9333ea; font-size: 18px; }
+        button {
+            background-color: #a855f7;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-top: 15px;
+            transition: 0.3s;
+        }
+        button:hover { background-color: #7e22ce; }
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>💜 สวัสดีชาวโลกสีม่วง 💜</h1>
+        <p>นี่คือเว็บเพจสวยๆ ที่สร้างผ่าน Python</p>
+        <button onclick="alert('ยินดีต้อนรับสู่เว็บไซต์!')">คลิกฉันสิ</button>
+    </div>
+</body>
+</html>
+"""
+
+# สร้างและบันทึกไฟล์ HTML
+filename = "purple_webpage.html"
+with open(filename, "w", encoding="utf-8") as file:
+    file.write(html_content)
+
+# สั่งให้เปิดบน Web Browser อัตโนมัติ
+filepath = 'file://' + os.path.realpath(filename)
+webbrowser.open(filepath)
